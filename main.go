@@ -18,12 +18,13 @@ func main() {
 	
 	fmt.Println("\nSanyam Asthana, 2026")
 
-	textBoolPtr := flag.Bool("text", false, "Get the response text")
-	headBoolPtr := flag.Bool("head", false, "Get the response header")
-	bustBoolPtr := flag.Bool("bust", false, "Brute-force web directories")
-	workerIntPtr := flag.Int("workers", 20, "Number of workers for directory busting")
-	filterCodeIntPtr := flag.Int("filter", 0, "Only show brute-forced paths with a specific status code")
-	verboseBoolPtr := flag.Bool("verbose", false, "Verbose output for brute-forcing")
+	textBoolFlagPtr := flag.Bool("text", false, "Get the response text")
+	headBoolFlagPtr := flag.Bool("head", false, "Get the response header")
+	bustBoolFlagPtr := flag.Bool("bust", false, "Brute-force web directories")
+	workerIntFlagPtr := flag.Int("workers", 20, "Number of workers for directory busting")
+	filterCodeIntFlagPtr := flag.Int("filter", 0, "Only show brute-forced paths with a specific status code")
+	verboseBoolFlagPtr := flag.Bool("verbose", false, "Verbose output for brute-forcing")
+	wordlistPathStringFlagPtr := flag.String("wordlist", "wordlist.txt", "The path for the wordlist for busting")
 
 	flag.Parse()
 
@@ -39,16 +40,16 @@ func main() {
 
 	modules.ShowStatusCode(resp)	
 	
-	if *headBoolPtr == true {
+	if *headBoolFlagPtr {
 		modules.ShowHeader(resp)
 	}
 	 
-	if *textBoolPtr == true {
+	if *textBoolFlagPtr {
 		modules.ShowBody(resp)
 	}
 	
-	if *bustBoolPtr == true {
-		modules.BruteForce(url, *workerIntPtr, *filterCodeIntPtr, *verboseBoolPtr)
+	if *bustBoolFlagPtr {
+		modules.BruteForce(url, *workerIntFlagPtr, *filterCodeIntFlagPtr, *verboseBoolFlagPtr, *wordlistPathStringFlagPtr)
 	}
 
 	resp.Body.Close()

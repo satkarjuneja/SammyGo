@@ -4,15 +4,14 @@ import (
 	"fmt"
 	"net/http"
 	"io"
-	"log"
 )
 
 func ShowBody(resp *http.Response){
-	defer resp.Body.Close()
 	var body, errBody = io.ReadAll(resp.Body)
 
 	if errBody != nil {
-		log.Fatal(errBody)
+		fmt.Printf("%sError loading request body!\n", ColorRed)
+		return
 	}
 	
 	fmt.Println("-------------BODY-------------")
