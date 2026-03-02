@@ -1,5 +1,5 @@
 <div align="center">
-<h1>SammyGo</h1>
+<img src="logo.png" style="width: 30%"><br>
 A CLI web-reconnaissance tool written in Go
 <br>
 <br>
